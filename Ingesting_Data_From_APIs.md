@@ -247,8 +247,12 @@ Below is a Python script demonstrating how to fetch data from the OpenFDA API.
 
 ```python
 # Import necessary libraries
-import requests  # For making HTTP requests
-import json      # For parsing JSON data
+import requests
+import json
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  
 
 # --- Configuration ---
 # Base URL for the API endpoint.
@@ -265,10 +269,11 @@ search_term = 'patient.reaction.reactionmeddrapt:"Fatigue"'
 limit = 10
 
 # Your API Key (Optional for OpenFDA for basic use, but recommended for higher limits).
-# Refer to the SOP (Standard Operating Procedure) or OpenFDA documentation to get an API key.
-# Although OpenFDA provides output without an API key, adding one is beneficial for testing your system
-# and ensuring you don't hit lower unauthenticated rate limits quickly.
-api_key = "YOUR_API_KEY_HERE"  # Replace with your actual API key if you have one
+api_key = os.getenv("OPENFDA_API_KEY")  # Make sure that your .env file has the exact name OPENFDA_API_KEY = "YOUR_API_KEY")
+if api_key:
+   print("OpenFDA key succesfully loaded")
+else:
+   print("OpenFDA key not found, continuing without one")
 
 # Parameters for the API request
 params = {
