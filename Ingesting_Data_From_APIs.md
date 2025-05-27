@@ -353,3 +353,124 @@ except json.JSONDecodeError:
 ---
 
 ## Data Validation and Transformation
+
+```python
+# This section processes the 'results' fetched from the API,
+# validates them, and transforms them into a flatter structure suitable for a database table.
+# This code block should be placed after your existing API request and response handling block.
+ 
+transformed_records = [] # Initialize an empty list to store transformed records
+ 
+# Check if 'results' has data and was populated successfully by the previous API call block
+if 'results' in locals() and isinstance(results, list) and results: # 'results' should be defined from the API call block
+    print(f"\n--- Starting Data Validation and Transformation for {len(results)} records --- ⛏️⚙️")
+    for record_index, record in enumerate(results):
+        # It's good practice to wrap individual record processing in a try-except block
+        # to handle potential errors in one record without stopping the entire process.
+        try:
+            # 1. Basic Validation: Check for essential identifiers
+            #    The 'safetyreportid' is a unique identifier for an adverse event report.
+            safety_report_id = record.get("safetyreportid")
+            if not safety_report_id:
+                print(f"  Skipping record at index {record_index}: Missing 'safetyreportid'. This is a critical identifier.")
+                continue # Skip to the next record if the main ID is missing
+ 
+            # 2. Data Extraction and Transformation
+            # Dates: OpenFDA often provides dates as YYYYMMDD strings.
+            # We will transform this into a more standard YYYY-MM-DD format.
+            receive_date_str = record.get("receivedate")
+            receive_date_formatted = None # Default to None if not available or invalid
+            if receive_date_str and len(receive_date_str) == 8 and receive_date_str.isdigit():
+                receive_date_formatted = f"{receive_date_str[0:4]}-{receive_date_str[4:6]}-{receive_date_str[6:8]}"
+            else:
+                # Log if date format is unexpected, but still proceed with None
+                if receive_date_str: # Only log if there was some value
+                    print(f"  Record ID {safety_report_id}: Unexpected 'receivedate' format ('{receive_date_str}'). Storing as None.")
+            # Seriousness fields (OpenFDA uses "1" for Yes, "2" for No).
+            # We will convert these to Boolean (True/False) for easier use.
+            is_serious = record.get("serious") == "1" # True if "1", False otherwise
+            seriousness_congenital_anom = record.get("seriousnesscongenitalanom") == "1"
+            seriousness_death = record.get("seriousnessdeath") == "1"
+ 
+            # Patient Information is in a nested dictionary called 'patient'.
+            # Use .get() with a default empty dictionary {} to prevent errors if 'patient' key is missing.
+            patient_info = record.get("patient", {})
+ 
+            # Patient Age: 'patientonsetage' is often a string, unit in 'patientonsetageunit' (e.g., 801 for Year).
+            # For simplicity, we'll convert to integer if it's a digit, assuming years.
+            # Robust parsing would check 'patientonsetageunit'.
+            patient_age_str = patient_info.get("patientonsetage")
+            patient_age = None # Default to None
+            if patient_age_str and patient_age_str.isdigit():
+                patient_age = int(patient_age_str)
+            # Patient Sex: Coded ('1' for Male, '2' for Female, '0' for Unknown).
+            # We'll map these codes to descriptive strings.
+            patient_sex_code = patient_info.get("patientsex")
+            patient_sex = "Unknown" # Default value
+            if patient_sex_code == "1":
+                patient_sex = "Male"
+            elif patient_sex_code == "2":
+                patient_sex = "Female"
+            # Other codes (like '0' or if it's missing) will result in "Unknown".
+ 
+            # Reactions: 'reaction' is a list of dictionaries. Each dictionary represents one reaction.
+            # We'll extract the MedDRA term ('reactionmeddrapt') of the primary (first) reaction for simplicity.
+            primary_reaction_meddra_pt = None # Default to None
+            if patient_info.get("reaction") and isinstance(patient_info["reaction"], list) and len(patient_info["reaction"]) > 0:
+                # Get the first reaction dictionary, and then get 'reactionmeddrapt' from it.
+                primary_reaction_meddra_pt = patient_info["reaction"][0].get("reactionmeddrapt")
+ 
+            # Drugs: 'drug' is a list of dictionaries. Each represents a drug involved.
+            # 'drugcharacterization' ('1': Suspect, '2': Concomitant, '3': Interacting).
+            # We'll try to find the primary "suspect" drug's name ('medicinalproduct').
+            primary_drug_name = None # Default to None
+            if patient_info.get("drug") and isinstance(patient_info["drug"], list):
+                for drug_item in patient_info["drug"]: # Renamed variable to avoid conflict
+                    if drug_item.get("drugcharacterization") == "1": # '1' usually indicates a Suspect drug
+                        primary_drug_name = drug_item.get("medicinalproduct")
+                        break # Take the first suspect drug found
+                if not primary_drug_name and len(patient_info["drug"]) > 0: # Fallback to the first drug if no "suspect" drug is clearly marked
+                    primary_drug_name = patient_info["drug"][0].get("medicinalproduct")
+            # 3. Construct the Transformed Record Dictionary
+            # This dictionary represents a row in our target table schema.
+            transformed_record = {
+                "safety_report_id": safety_report_id,
+                "receive_date": receive_date_formatted,
+                "is_serious": is_serious,
+                "seriousness_congenital_anom": seriousness_congenital_anom,
+                "seriousness_death": seriousness_death,
+                "patient_age": patient_age,
+                "patient_sex": patient_sex,
+                "primary_reaction_meddra_pt": primary_reaction_meddra_pt,
+                "primary_drug_name": primary_drug_name
+                # Add any other fields you deem necessary for your target table
+            }
+            transformed_records.append(transformed_record)
+            # You could print a success message for each transformed record during debugging:
+            # print(f"  Successfully transformed record ID: {safety_report_id}")
+ 
+        except Exception as e:
+            # Catch any unexpected errors during the transformation of a single record.
+            # This ensures that one bad record doesn't stop the entire batch.
+            print(f"  Error processing record at index {record_index} (ID: {record.get('safetyreportid', 'N/A')}): {e} 💔")
+            # Consider logging these errors to a file or an error tracking system in a production environment.
+ 
+    print(f"--- Data Validation and Transformation Complete --- ✨")
+    print(f"Successfully transformed {len(transformed_records)} records out of {len(results) if 'results' in locals() and isinstance(results, list) else 0} initial records.")
+ 
+    # You can now work with the 'transformed_records' list.
+    # For example, print the first few transformed records to inspect them:
+    if transformed_records:
+        print("\nSample of transformed records (up to first 2):")
+        for i, tr_rec in enumerate(transformed_records[:2]): # Print first 2 transformed records
+            print(json.dumps(tr_rec, indent=2)) # Pretty print the JSON
+            # if i >= 1: break # uncomment if you strictly want max 2 even if fewer than 2 total
+    else:
+        print("No records were successfully transformed. 🤔")
+ 
+elif 'results' in locals() and isinstance(results, list) and not results: # This 'results' is from the API call block
+     print("\nNo results were found from the API call to validate or transform. 🤷‍♂️")
+else:
+    # This case handles if 'results' was not defined or not a list (e.g., API call failed before 'results' was assigned)
+    print("\nAPI call might have failed, 'results' list not available for transformation. Check previous logs. 🤷‍♀️")
+```
