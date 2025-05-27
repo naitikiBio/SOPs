@@ -239,6 +239,7 @@ While OpenFDA allows some access without an API key, getting one is free and pro
 The OpenFDA API provides public access to a wealth of data related to drugs, devices, and food. While not compulsory for all API interactions (many third-party APIs require keys from the outset), it's highly recommended to learn about APIs with OpenFDA. Registering for an API key can also grant you a higher request limit.
 
 * **OpenFDA website**: [https://open.fda.gov/apis/try-the-api/](https://open.fda.gov/apis/try-the-api/)
+* **OpenFDA API key**: [https://open.fda.gov/apis/authentication/](https://open.fda.gov/apis/authentication/) You have to enter your email address, where you will get your API key
 
 ### Code (To get OpenFDA data)
 
