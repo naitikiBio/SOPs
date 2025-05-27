@@ -19,11 +19,8 @@ This guide provides an overview of how to ingest data from APIs, using the OpenF
     * [OpenFDA Overview](#openfda-overview)
     * [Python Code with `.env` for API Key](#python-code-with-env-for-api-key)
     * [Additional Notes on the Code](#additional-notes-on-the-code)
-5.  [Standard Operating Procedures (SOPs) and Pseudocode](#standard-operating-procedures-sops-and-pseudocode-)
-    * [SOP: API Authentication](#sop-api-authentication)
-    * [SOP: Request/Response Handling](#sop-requestresponse-handling)
-    * [SOP: Data Validation and Transformation](#sop-data-validation-and-transformation)
-    * [SOP: Simulated Push to BigQuery](#sop-simulated-push-to-bigquery)
+5.  [Data Validation and Transformation](#data-validation-and-transformation)
+
 
 
 ## Getting Started: Python 3.11 Installation 🐍
@@ -351,3 +348,7 @@ except json.JSONDecodeError:
     # It's helpful to see what non-JSON response was received.
     # Check if 'response' variable exists before trying to access its 'text' attribute.
     print(f"Response content: {response.text if 'response' in locals() else 'N/A (response object not available)'}")
+
+---
+
+## Data Validation and Transformation
