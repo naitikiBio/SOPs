@@ -4,6 +4,28 @@ This guide provides an overview of how to ingest data from APIs, using the OpenF
 
 ---
 
+## Table of Contents
+
+1.  [Getting Started: Python 3.11 Installation](#getting-started-python-311-installation-)
+    * [Downloading Python 3.11](#1-downloading-python-311)
+    * [Installing Python 3.11](#2-installing-python-311)
+    * [Using Pip to Install `requests` and `python-dotenv`](#3-using-pip-to-install-requests-and-python-dotenv-)
+2.  [Securing API Keys with `.env` Files](#securing-api-keys-with-env-files-)
+3.  [Understanding API Authentication](#understanding-api-authentication-)
+    * [API Keys](#1-api-keys)
+    * [OAuth 2.0 (Open Authorization)](#2-oauth-20-open-authorization)
+    * [Getting an OpenFDA API Key](#getting-an-openfda-api-key-)
+4.  [Example: Getting OpenFDA API Data](#example-getting-openfda-api-data-)
+    * [OpenFDA Overview](#openfda-overview)
+    * [Python Code with `.env` for API Key](#python-code-with-env-for-api-key)
+    * [Additional Notes on the Code](#additional-notes-on-the-code)
+5.  [Standard Operating Procedures (SOPs) and Pseudocode](#standard-operating-procedures-sops-and-pseudocode-)
+    * [SOP: API Authentication](#sop-api-authentication)
+    * [SOP: Request/Response Handling](#sop-requestresponse-handling)
+    * [SOP: Data Validation and Transformation](#sop-data-validation-and-transformation)
+    * [SOP: Simulated Push to BigQuery](#sop-simulated-push-to-bigquery)
+
+
 ## Getting Started: Python 3.11 Installation 🐍
 
 To run the example code and interact with APIs using Python, you'll need Python installed on your system. We recommend using Python 3.11 or a newer version.
