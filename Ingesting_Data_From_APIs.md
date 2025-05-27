@@ -348,6 +348,7 @@ except json.JSONDecodeError:
     # It's helpful to see what non-JSON response was received.
     # Check if 'response' variable exists before trying to access its 'text' attribute.
     print(f"Response content: {response.text if 'response' in locals() else 'N/A (response object not available)'}")
+```
 
 ---
 
