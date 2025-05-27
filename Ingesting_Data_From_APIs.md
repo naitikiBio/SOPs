@@ -227,7 +227,7 @@ When you interact with APIs, especially those providing access to sensitive data
 
 While OpenFDA allows some access without an API key, getting one is free and provides a higher rate limit.
 
-1.  **Visit**: [https://open.fda.gov/api/reference/#api-key](https://open.fda.gov/api/reference/#api-key)
+1.  **Visit**: [https://open.fda.gov/apis/authentication/](https://open.fda.gov/apis/authentication/)
 2.  **Provide Your Email Address** and agree to terms.
 3.  **Receive Your API Key** via email.
 4.  **Store it Securely**: Place this key in your `.env` file as `OPENFDA_API_KEY="YOUR_KEY"`.
