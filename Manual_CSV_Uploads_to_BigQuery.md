@@ -38,9 +38,9 @@ This SOP applies to all personnel involved in uploading CSV data to BigQuery, in
 Defining a schema upfront ensures data integrity and proper type handling.
 
 **4.1.1. Auto-detect Schema (Recommended for initial exploration or simple CSVs):**
-1.  **Navigate to GCP Console**:  https://console.cloud.google.com/
-2.  **Open BigQuery** (Make sure you have access to BigQuery enabled)
-3.  **Select the project you want to upload your CSV to**
+1.  **Navigate to GCP Console**:  https://console.cloud.google.com/ 
+2.  **Select the project you want to upload your CSV to**: Right besides Google Cloud on the top left, you would either have select project or your project's id, make sure you select the correct project
+3.  **Open BigQuery** (Make sure you have access to BigQuery enabled)
 4. **Click the toggle button right besides the project name and select the datatset where you want to upload your CSV**: Click the three vertical dots besides the dataset to open up menu. Note: If you don't have a dataset, create one by clicking the three vertical dots besides the project name
 5. **Create Table**: In the menu, click "Create Table"
 6. **Source**: 
@@ -61,4 +61,7 @@ Defining a schema upfront ensures data integrity and proper type handling.
 	 - **Allow jagged rows**: If rows can have a varying number of columns.
 	 - **Allow quoted newlines**: If fields can contain newline characters within quotes.
 	 - **Null marker**: Specify how NULL values are represented in your CSV (e.g., \N, empty string).
-10. **Create**: Click "Create table". 
+10. **Create**: Click "Create table".
+
+Review this video for visual representation of the above steps
+https://youtu.be/HhS6Gn0Rg-0
