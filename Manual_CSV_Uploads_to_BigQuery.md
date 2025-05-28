@@ -104,4 +104,78 @@ This library provides a high-level interface for interacting with BigQuery throu
 	```python
 	import pandas as pd
 	from pandas_gbq import to_gbq, read_gbq
+
+ 	# --- Configuration ---
+ 	# Additionally you can replace all this using .env
+ 	project_id = "your-gcp-project-id"
+ 	dataset_id = "your_table_id"
+ 	table_id = "your_tbale_id"
+ 	csv_file_path = "path/to/your/file.csv
+
+ 	# Optionally, you can define what to do if the table already exists
+ 	# 'fail': If table exists, do nothing.
+ 	# 'replace': If table exists, drop it, recreate it, and insert data.
+ 	# 'append': If table exists, insert data. Create if does not exist.
+ 	if_exists_strategy = 'append' # or select from the above list
+
+ 	# --- Load CSV into Pandas Dataframe ---
+ 	try:
+ 		df = pd.read_csv(csv_file_path)
+ 		print(f"Succesfully loaded CSV '{csv_file_path}' into DataFrame.")
+ 		print("DataFrame info:")
+ 		df.info()
+ 		print("\nFirst 5 rows:")
+ 		print(df.head())
+ 	except FileNotFoundError:
+ 		print(f"Error: CSV file not found at '{csv_file_path}'")
+ 		exit()
+ 	except pd.errors.EmptyDataError:
+ 		print(f"Error: CSV file '{csv_file_path}' is empty.")
+ 		exit()
+ 	except Exception as e:
+ 		print(f"Error reading CSV file '{csv_file_path}': {e}")
+ 		exit()
+
+ 	# --- Define Table Schema (Optional but Recommended for `pandas-bgq` for explicit control) ---
+ 	# pandas-bgq can infer schema, but explicit definition is safer.
+ 	# The schema should be a list of dictionaries, matching BigQuery's schema format.
+ 	# Comment this code out if not defining schema explicitly
+ 	table_schema = [
+ 		{'name': 'column_name1', 'type': 'STRING'},
+ 		{'name': 'column_name2', 'type': 'INTEGER'},
+ 		# Add all your columns here
+	]
+
+ 	# --- Checking Datatypes ---
+ 	# Make sure pandas assigned the correct datatypes to your dataset columns, for that run `df.dtypes()` where df is the DataFrame name you gave when reading
+ 	# To convert any columnn datatype
+ 	df['date_column'] = pd.to_datetime(df['date_column']) # Example type conversion
+
+ 	# --- Upload DataFrame to BigQuery ---
+ 	full_table_id = f"{dataset_id}.{table_id}"
+ 	try:
+ 		print(f"\nUploading DataFrame to BigQuery table: {project_id}.{full_table_id} with strategy: {if_exists_strategy}")
+ 		to_gbq(
+ 			dataframe = df,
+ 			destination_table = full_table_id,
+ 			project_id = project_id,
+ 			if_exists = if_exists_strategy,
+ 			table_schema = table_schema # Comment this out if you are not explicitly defining schema
+ 		)
+ 		print(f"Succesfully uploaded data to {full_table_id}.")
+
+ 	except Exception as e:
+ 		print(f"Error uploading data to BigQuery: {e}")
+
+ 	# --- Optionally verify your data ---
+ 	try:
+ 		query = f"SELECT * FROM `{project_id}.{full_table_id}' LIMIT 5"
+ 		df_from_bgq = read_bgq(query, project_id = project_id)
+ 		print("\nFirst 5 rows from BugQuery table:")
+ 		print(df_from_gbq)
+ 	except Exception as e:
+ 		print(f"Error reading data back from BigQuery: {e}")
 	```
+ 	
+
+ 4. **Run the script**: Save the above script and then execute `python your_script_name.py` in your terminal (make sure you are in the directory in the terminal where your script is saved)
