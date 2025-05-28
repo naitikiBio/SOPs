@@ -226,9 +226,10 @@ While OpenFDA allows some access without an API key, getting one is free and pro
 
 1.  **Visit**: [https://open.fda.gov/apis/authentication/](https://open.fda.gov/apis/authentication/)
 2.  **Provide Your Email Address** and agree to terms.
+  ![Screenshot 2025-05-28 092934](https://github.com/user-attachments/assets/1c4137fd-f408-4da3-be9c-4f3802594d76)
 3.  **Receive Your API Key** via email.
 4.  **Store it Securely**: Place this key in your `.env` file as `OPENFDA_API_KEY="YOUR_KEY"`.
-
+   
 ---
 
 ## Getting OpenFDA API Data 
