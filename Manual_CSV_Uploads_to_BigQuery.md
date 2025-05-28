@@ -63,6 +63,8 @@ Defining a schema upfront ensures data integrity and proper type handling.
 	 - **Null marker**: Specify how NULL values are represented in your CSV (e.g., \N, empty string).
 10. **Create**: Click "Create table".
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://youtu.be/HhS6Gn0Rg-0)
+
 Review this video for visual representation of the above steps
 [![YouTube](https://youtu.be/HhS6Gn0Rg-0 "YouTube")](https://youtu.be/HhS6Gn0Rg-0 "YouTube")
 
