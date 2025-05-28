@@ -61,4 +61,4 @@ Defining a schema upfront ensures data integrity and proper type handling.
 	 - **Allow jagged rows**: If rows can have a varying number of columns.
 	 - **Allow quoted newlines**: If fields can contain newline characters within quotes.
 	 - **Null marker**: Specify how NULL values are represented in your CSV (e.g., \N, empty string).
-10. **Review and Create**: Review the detected schema. If it looks correct, click "Create table". If not, proceed to manual schema definition (4.1.2)
+10. **Create**: Click "Create table". 
