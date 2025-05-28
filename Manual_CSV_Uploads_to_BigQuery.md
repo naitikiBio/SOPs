@@ -73,6 +73,7 @@ https://youtu.be/HhS6Gn0Rg-0
 	 - You can define the schema in three ways:
 	 	 -  **Edit as text**: Provide the schema as a JSON array.
 		 	 - Example:
+       				```JSON
 			 	[
 					{"name": "column_name1", "type": "STRING", "mode": "NULLABLE"},
 					{"name": "column_name2", "type": "INTEGER", "mode": "NULLABLE"},
@@ -80,6 +81,7 @@ https://youtu.be/HhS6Gn0Rg-0
 					{"name": "column_name4", "type": "DATE", "mode": "NULLABLE"},
 					{"name": "column_name5", "type": "BOOLEAN", "mode": "NULLABLE"}
 				]
+    				```
 		- **Common Types**: STRING, BYTES, INTEGER (or INT64), FLOAT (or FLOAT64), NUMERIC, BIGNUMERIC, BOOLEAN (or BOOL), TIMESTAMP, DATE, TIME, DATETIME, GEOGRAPHY, JSON.
 		 - **Modes**: 
 		 	 	- NULLABLE: The column allows NULL values (most common).
