@@ -23,7 +23,7 @@ This guide provides an overview of how to ingest data from APIs, using the OpenF
 
 
 
-## Getting Started: Python 3.11 Installation 🐍
+## Getting Started: Python 3.11 Installation 
 
 To run the example code and interact with APIs using Python, you'll need Python installed on your system. We recommend using Python 3.11 or a newer version.
 
@@ -34,7 +34,7 @@ To run the example code and interact with APIs using Python, you'll need Python 
 
 ### 2. Installing Python 3.11
 
-#### For Windows 🪟
+#### For Windows 
 
 1.  **Download**: Download the Windows installer (e.g., `python-3.11.x-amd64.exe`).
 2.  **Run Installer**: Double-click the downloaded installer.
@@ -49,7 +49,7 @@ To run the example code and interact with APIs using Python, you'll need Python 
     * Type `python --version` and press Enter. You should see `Python 3.11.x`.
     * Type `pip --version` and press Enter. You should see pip's version associated with Python 3.11.
 
-#### For macOS 🍎
+#### For macOS 
 
 1.  **Download**: Download the macOS 64-bit universal installer from the [Python website](https://www.python.org/downloads/mac-osx/).
 2.  **Run Installer**: Double-click the downloaded `.pkg` file.
@@ -66,7 +66,7 @@ To run the example code and interact with APIs using Python, you'll need Python 
     ```
     Then, follow the instructions provided by Homebrew regarding PATH setup if needed.
 
-#### For Linux 🐧
+#### For Linux 
 
 Installation methods vary slightly depending on your Linux distribution.
 
@@ -115,7 +115,7 @@ Installation methods vary slightly depending on your Linux distribution.
 
 ---
 
-### 3. Using Pip to Install `requests` 📦
+### 3. Using Pip to Install `requests` 
 
 **Pip** is the package installer for Python. You use pip to install packages from the Python Package Index (PyPI). The `requests` library is a popular HTTP library for making API calls.
 
@@ -147,7 +147,7 @@ Installation methods vary slightly depending on your Linux distribution.
     ```
     This should print the installed version of the `requests` library without any errors.
 
-**Best Practice: Virtual Environments** ✨
+**Best Practice: Virtual Environments** 
 
 It's highly recommended to use virtual environments for your Python projects. This isolates project dependencies and avoids conflicts between projects.
 
@@ -177,7 +177,7 @@ It's highly recommended to use virtual environments for your Python projects. Th
 
 ---
 
-## Securing API Keys with `.env` Files 🛡️
+## Securing API Keys with `.env` Files 🛡
 
 Hardcoding API keys or other sensitive credentials directly into your scripts is a security risk, especially if the code is shared or committed to version control (like Git). A common practice is to use `.env` files to store these credentials as environment variables.
 
@@ -204,7 +204,7 @@ A `.env` (dot env) file is a simple text file that stores key-value pairs defini
 
 ---
 
-## Understanding API Authentication 🔑
+## Understanding API Authentication 
 
 When you interact with APIs, especially those providing access to sensitive data or those that want to track usage, you'll often need to authenticate your requests.
 
@@ -231,7 +231,7 @@ While OpenFDA allows some access without an API key, getting one is free and pro
 
 ---
 
-## Getting OpenFDA API Data 💊
+## Getting OpenFDA API Data 
 
 The OpenFDA API provides public access to a wealth of data related to drugs, devices, and food. While not compulsory for all API interactions (many third-party APIs require keys from the outset), it's highly recommended to learn about APIs with OpenFDA. Registering for an API key can also grant you a higher request limit.
 
@@ -298,7 +298,7 @@ try:
     # --- Response Handling ---
     # Check if the request was successful (HTTP Status Code 200)
     if response.status_code == 200:
-        print("Successfully fetched data from API 👍")
+        print("Successfully fetched data from API")
         
         # Parse the JSON response
         data = response.json()
@@ -312,7 +312,7 @@ try:
             # You can now process the 'results' list, e.g., print the first record:
             # print("First record:", json.dumps(results[0], indent=2))
         else:
-            print("No results found for the query. 🤷")
+            print("No results found for the query.")
 
         # To look for pagination info, look at the 'meta' part of the response.
         meta_data = data.get("meta")
@@ -327,24 +327,24 @@ try:
     # In case you are accessing OpenFDA without the API key, or your key has insufficient privileges,
     # adding a valid API key gives you a higher rate limit.
     elif response.status_code == 429:
-        print(f"Error: Rate limit exceeded (429). 🐢 Try again later or check API key usage.")
+        print(f"Error: Rate limit exceeded (429). Try again later or check API key usage.")
         print(f"Response content: {response.text}") # See if there is more info (e.g., retry-after header)
 
     else:
         # Handle other HTTP error codes
-        print(f"Error fetching data: Status Code {response.status_code} ❌")
+        print(f"Error fetching data: Status Code {response.status_code}")
         print(f"Response content: {response.text}") # Print the error message from the API
 
 except requests.exceptions.Timeout:
-    print(f"Request timed out after 30 seconds. ⏳ Server might be slow or network issue.")
+    print(f"Request timed out after 30 seconds. Server might be slow or network issue.")
 
 except requests.exceptions.RequestException as e:
     # Handle other request-related errors (e.g., network issues, DNS failure)
-    print(f"Request failed: {e} 💔")
+    print(f"Request failed: {e}")
 
 except json.JSONDecodeError:
     # Handle errors if the response is not valid JSON
-    print("Error: Failed to decode JSON response from API. 📉")
+    print("Error: Failed to decode JSON response from API.")
     # It's helpful to see what non-JSON response was received.
     # Check if 'response' variable exists before trying to access its 'text' attribute.
     print(f"Response content: {response.text if 'response' in locals() else 'N/A (response object not available)'}")
@@ -363,7 +363,7 @@ transformed_records = [] # Initialize an empty list to store transformed records
  
 # Check if 'results' has data and was populated successfully by the previous API call block
 if 'results' in locals() and isinstance(results, list) and results: # 'results' should be defined from the API call block
-    print(f"\n--- Starting Data Validation and Transformation for {len(results)} records --- ⛏️⚙️")
+    print(f"\n--- Starting Data Validation and Transformation for {len(results)} records ---")
     for record_index, record in enumerate(results):
         # It's good practice to wrap individual record processing in a try-except block
         # to handle potential errors in one record without stopping the entire process.
@@ -452,10 +452,10 @@ if 'results' in locals() and isinstance(results, list) and results: # 'results' 
         except Exception as e:
             # Catch any unexpected errors during the transformation of a single record.
             # This ensures that one bad record doesn't stop the entire batch.
-            print(f"  Error processing record at index {record_index} (ID: {record.get('safetyreportid', 'N/A')}): {e} 💔")
+            print(f"  Error processing record at index {record_index} (ID: {record.get('safetyreportid', 'N/A')}): {e}")
             # Consider logging these errors to a file or an error tracking system in a production environment.
  
-    print(f"--- Data Validation and Transformation Complete --- ✨")
+    print(f"--- Data Validation and Transformation Complete ---")
     print(f"Successfully transformed {len(transformed_records)} records out of {len(results) if 'results' in locals() and isinstance(results, list) else 0} initial records.")
  
     # You can now work with the 'transformed_records' list.
@@ -466,11 +466,11 @@ if 'results' in locals() and isinstance(results, list) and results: # 'results' 
             print(json.dumps(tr_rec, indent=2)) # Pretty print the JSON
             # if i >= 1: break # uncomment if you strictly want max 2 even if fewer than 2 total
     else:
-        print("No records were successfully transformed. 🤔")
+        print("No records were successfully transformed.")
  
 elif 'results' in locals() and isinstance(results, list) and not results: # This 'results' is from the API call block
-     print("\nNo results were found from the API call to validate or transform. 🤷‍♂️")
+     print("\nNo results were found from the API call to validate or transform.")
 else:
     # This case handles if 'results' was not defined or not a list (e.g., API call failed before 'results' was assigned)
-    print("\nAPI call might have failed, 'results' list not available for transformation. Check previous logs. 🤷‍♀️")
+    print("\nAPI call might have failed, 'results' list not available for transformation. Check previous logs.")
 ```
