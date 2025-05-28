@@ -65,3 +65,27 @@ Defining a schema upfront ensures data integrity and proper type handling.
 
 Review this video for visual representation of the above steps
 https://youtu.be/HhS6Gn0Rg-0
+
+**4.1.2. Manual Schema Definition (Recommended for production, complex CSVs, or when auto-detect is insufficient)**:
+1.  **Follow steps 1-7 from 4.1.1.**
+2.  **Schema**:
+	 - Disable "Auto detect schema and input parameters".
+	 - You can define the schema in three ways:
+	 	 -  **Edit as text**: Provide the schema as a JSON array.
+		 	 - Example:
+			 	[
+					{"name": "column_name1", "type": "STRING", "mode": "NULLABLE"},
+					{"name": "column_name2", "type": "INTEGER", "mode": "NULLABLE"},
+					{"name": "column_name3", "type": "FLOAT", "mode": "NULLABLE"},
+					{"name": "column_name4", "type": "DATE", "mode": "NULLABLE"},
+					{"name": "column_name5", "type": "BOOLEAN", "mode": "NULLABLE"}
+				]
+		- **Common Types**: STRING, BYTES, INTEGER (or INT64), FLOAT (or FLOAT64), NUMERIC, BIGNUMERIC, BOOLEAN (or BOOL), TIMESTAMP, DATE, TIME, DATETIME, GEOGRAPHY, JSON.
+		 - **Modes**: 
+		 	 	- NULLABLE: The column allows NULL values (most common).
+				 - REQUIRED: The column does not allow NULL values.
+				 - REPEATED: The column contains an array of values of the specified type.
+	 - **Add field (+)**: Use the UI to add each filed one by one, specifying its Name, Type, Mode, and optionally a Description.
+	 - **Upload schema file**: If you have a JSON schema file, you can upload it.
+3.  **Advanced Options**: Configure as described in 4.1.1., step 9
+4. **Create Table**: Click "Create table".
