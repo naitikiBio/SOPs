@@ -101,7 +101,7 @@ This library provides a high-level interface for interacting with BigQuery throu
 1.  **Installation**:
 	Install the required dependencies if not (refer to the start of this SOP)
 2.  **Python Script**:
-```python
-import pandas as pd
-from pandas_gbq import to_gbq, read_gbq
-```
+	```python
+	import pandas as pd
+	from pandas_gbq import to_gbq, read_gbq
+	```
