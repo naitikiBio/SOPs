@@ -64,4 +64,7 @@ Defining a schema upfront ensures data integrity and proper type handling.
 10. **Create**: Click "Create table".
 
 Review this video for visual representation of the above steps
+[![YouTube](https://youtu.be/HhS6Gn0Rg-0 "YouTube")](https://youtu.be/HhS6Gn0Rg-0 "YouTube")
+
+Review this video for visual representation of the above steps
 https://youtu.be/HhS6Gn0Rg-0
