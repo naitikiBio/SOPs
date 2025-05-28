@@ -91,3 +91,17 @@ https://youtu.be/HhS6Gn0Rg-0
 	 - **Upload schema file**: If you have a JSON schema file, you can upload it.
 3.  **Advanced Options**: Configure as described in 4.1.1., step 9
 4. **Create Table**: Click "Create table".
+
+**4.2. Using Python for Ingestion**
+This method is suitable for automated workflows, larger files (though direct GCS to BigQuery is better for very large files), or when preprocessing with Pandas is needed.
+
+**4.2.1. Using pandas-gbq**
+
+This library provides a high-level interface for interacting with BigQuery through Pandas DataFrames.
+1.  **Installation**:
+	Install the required dependencies if not (refer to the start of this SOP)
+2.  **Python Script**:
+```python
+import pandas as pd
+from pandas_gbq import to_gbq, read_gbq
+```
