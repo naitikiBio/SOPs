@@ -177,7 +177,7 @@ It's highly recommended to use virtual environments for your Python projects. Th
 
 ---
 
-## Securing API Keys with `.env` Files 🛡
+## Securing API Keys with `.env` Files
 
 Hardcoding API keys or other sensitive credentials directly into your scripts is a security risk, especially if the code is shared or committed to version control (like Git). A common practice is to use `.env` files to store these credentials as environment variables.
 
