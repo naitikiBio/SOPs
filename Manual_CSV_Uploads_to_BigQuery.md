@@ -190,4 +190,29 @@ Install the required dependencies if not (refer to the start of this SOP)
 Same as for pandas-gbq
 
 3. **Python Script**:
+	```python
+ 	import pandas as pd
+ 	from google.cloud import bigquery
+ 	from google.oauth2 import service_account # if using service key
 
+ 	# --- Configuration ---
+ 	project_id = "your-gcp-project-id"
+ 	dataset_id = "your_dataset_id"
+ 	table_id = "your_table_id"
+ 	csv_file_path = "path/to/your/file.csv"
+ 	# Optional: Path to your service account key JSON file
+ 	# service_account_key_path = "path/to/your-service-account-key.json"
+
+ 	# --- Initialize BigQuery Client ---
+ 	try:
+		# Using either one of these, comment the other one, so if using service account key, comment the ADC lines and vice versa
+ 		# If using a service account key:
+ 		# credentials = service_account.Credentials.from_service_account_file(service_account_key_path)
+ 		# client = bigquery.Client(credentials = credentials, project = project_id)
+
+ 		# If using Application Default Credentials (ADC):
+ 		client = bigquery.Client(project = project_id)
+ 		print("BigQuery client initialized succesfully.")
+ 	except Exception as e:
+ 		print(f"Error initializing BigQuery client: {e}")
+ 		exit()
