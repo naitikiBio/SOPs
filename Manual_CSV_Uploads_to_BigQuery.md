@@ -216,3 +216,31 @@ Same as for pandas-gbq
  	except Exception as e:
  		print(f"Error initializing BigQuery client: {e}")
  		exit()
+
+ 	# --- Define Table Schema (Required if table doesn't exist or if you want to ensure schema) ---
+ 	schema = [
+		bigquery.SchemaField("column_name1", "STRING", mode = "NULLABLE"),
+ 		bigquery.SchemaField("column_name2", "INTEGER", mode = "NULLABLE"),
+ 		bigquery.SchemaField("column_name3", "FLOAT", mode = "NULLABLE"),
+ 		bigquery.SchemaField("column_name4", "DATE", mode = "NULLABLE") # Ensure CSV data is 'YYYY-MM-DD'
+ 		# Add all your columns here, matching the CSV header and desired BQ types 
+ 	]
+
+ 	# --- Construct Table Reference ---
+ 	table_ref = client.dataset(dataset_id).table(table_id)
+ 	full_table_id_str = f"{project_id}.{dataset_id}.{table_id}"
+
+ 	# --- Configure Load Job ---
+ 	job_config = bigquery.LoadJobConfig()
+ 	job_config.source_format = bigquery.SourceFormat.CSV
+ 	job_config.skip_leading_rows = 1 # Skip the header row
+ 	job_config.autodetect = False # Set to True if you want BigQuery to auto detect schema, but explicit schema is better
+ 	job_config.schema = schema # Use the explicitly defined schema
+ 	job_config.write_disposition = bigquery.WriteDisposition.WRITE_APPEND # Or WRITE_TRUNCATE, WRITE_EMPTY
+
+ 	# Optional variables
+ 	# job_config.null_marker = "\\N" # If NULLS are represented as \N
+ 	# job_config.allow_jagged_rows = True # Optional Allow missing trailing optional columns
+ 	# job_config.allow_quoted_newlines = True # Optional Allow quoted data containing newline characters (CSV only)
+
+ 	# --- Load Data 
