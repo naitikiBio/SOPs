@@ -83,10 +83,10 @@ https://youtu.be/HhS6Gn0Rg-0
 				]
     			```
 		- **Common Types**: STRING, BYTES, INTEGER (or INT64), FLOAT (or FLOAT64), NUMERIC, BIGNUMERIC, BOOLEAN (or BOOL), TIMESTAMP, DATE, TIME, DATETIME, GEOGRAPHY, JSON.
-		 - **Modes**:
-   				- NULLABLE: The column allows NULL values (most common).
-     				- REQUIRED: The column does not allow NULL values.
-     				- REPEATED: The column contains an array of values of the specified type.
+		- **Modes**:
+			- NULLABLE: The column allows NULL values (most common).
+			- REQUIRED: The column does not allow NULL values.
+			- REPEATED: The column contains an array of values of the specified type.
 	 - **Add field (+)**: Use the UI to add each filed one by one, specifying its Name, Type, Mode, and optionally a Description.
 	 - **Upload schema file**: If you have a JSON schema file, you can upload it.
 3.  **Advanced Options**: Configure as described in 4.1.1., step 9
