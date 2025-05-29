@@ -273,5 +273,43 @@ Same as for pandas-gbq
  			print(row)
  		except Exception as e:
  			print(f"Error querying data from BigQuery: {e}")
- 
+
+ 	```
 4. **Run the script**: Save the above script, ensuring `.py` extension and then execute by running `python your_script_name.py` in the terminal (Make sure you have navigated to the file directory in the terminal before executing the above command.
+
+**4.4. Common Errors and Troubleshooting**
+
+**4.4.1.Schema Mismatch**:
+- **Error Message (Example)**: "Error while reading data, error message: CSV table encountered too many errors, giving up. Rows: 1; errors: 1. Missing data for column: column_x." or "Provided schema doesn not match Table project:dataset.table. Field field_name has changed type from TYPE_A TO TYPE_B"
+- **Cause**:
+	- The number of columns in the CSV file foes not match the number of columns in the BigQuery table schema.
+ 	- The data type of a column in the CSV file in incompatible with the data type defined in the BigQuery schema (e.g., trying to load "abc" into an INTEGER column).
+  	- Column order in CSV doesn't match schema if not using header row for mapping.
+- **Resolution**:
+  1. **Verify CSV Header**: Ensure the CSV header row (if used and skipped) matched the column named and order executed by the schema.
+  2. **Check Column Count**: Manually inspect a few rows of the CSV to ensure the correct number of delimiters (commas) per row.
+  3. **Review Schema**: Double-check the BigQuery table schema against the CSV structure.
+     - Use "Auto detect schema" (4.1.1) on a small samle of the CSV to see how BigQuery interprets it, then compare with your manual schema.
+     - For pandas-gbq, ensure DataFrame dtypes are appropriate or provide an explicit table_schema
+     - For google-cloud-bigquery, ensure your bigquery.SchemaField definitions are correct.
+  4. **Data Cleansing**: Clean the CSV data to correct type inconsistencies before uploading (e.g., remove non-numeric characters from a column intended to be INTEGER). Pandas can be very usefulfor this preprocessing step.
+  5. **Adjust skip_leading_rows**: Ensure this is set correctly (usually 1 for a header).
+  6. **Consider allow_jagged_rows**: If some rows legitimately have fewer columns, and missing values should be NULL, this option can help (use with caution, as it can mask other issues).
+ 
+  **4.4.2. NULL Handling/Empty Values**:
+  - **Error Message (Example)**: "Could not parse" as INT64 for column column_y" or issues with REQUIRED fields.
+  - **Cause**:
+    - Empty strings ("") in the CSV are being interpreted as values that cannot be cast to the trget data type (e.g., an empty string for an INTEGER column).
+    - A REQUIRED (NOT NULL) column in BigQuery is receiving a NULL or empty value from the CSV.
+  - **Resolution**:
+    1. **Specify null_maker**: If your CSV uses a specific string to represent NULLs (e.g., \N, NULL, NA), specify this in the "Null marker" field (GCP Console) or job_config.null_marker (Python google-cloud-bigquery). pandas-gpq handles Pandas NaN values correctly as NULLs.
+    2. **Preprocessing with Pandas**:
+       - Replace empty strings or custom NULL representations with numpy.nan before uploading with pandas-gbq, as NaN is translated to NULL be BigQuery.
+       - ```python
+         import numpy as np
+         df.replace(", np.nan, inpace = True) # Replace empty strings with NaN
+         df.replace('NA', np.nan, inplace = True) # Replace 'NA' strings with NaN
+         ```
+       - Ensure columns intended for numeric types do not contain empty strings if those should be NULL.
+    3. **Schema Mode**: If a column can legitimately contain NULLs, ensure its mode is NULLABLE in the BigQuery schema. If it's REQUIRED, you must provide a valid, non-null value in the CSV or preprocess it.
+    4. **Default Values**: For REQUIRED fields, if appropriate, consider transforming empty/null CSV values to a default value during preprocessing before loading.
