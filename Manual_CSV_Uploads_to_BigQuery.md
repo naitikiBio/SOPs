@@ -179,3 +179,15 @@ This library provides a high-level interface for interacting with BigQuery throu
  	
 
  4. **Run the script**: Save the above script and then execute `python your_script_name.py` in your terminal (make sure you are in the directory in the terminal where your script is saved)
+
+**4.3.2. Using google-cloud-bigquery**
+
+This library provides more granular control over BigQuery operations.
+1. **Installation (if not already installed)**:
+Install the required dependencies if not (refer to the start of this SOP)
+
+2. **Authentication**:
+Same as for pandas-gbq
+
+3. **Python Script**:
+
