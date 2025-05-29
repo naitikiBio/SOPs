@@ -313,3 +313,31 @@ Same as for pandas-gbq
        - Ensure columns intended for numeric types do not contain empty strings if those should be NULL.
     3. **Schema Mode**: If a column can legitimately contain NULLs, ensure its mode is NULLABLE in the BigQuery schema. If it's REQUIRED, you must provide a valid, non-null value in the CSV or preprocess it.
     4. **Default Values**: For REQUIRED fields, if appropriate, consider transforming empty/null CSV values to a default value during preprocessing before loading.
+
+**4.4.3. Encoding Issues**:
+- **Error Message (Example)**: "Error while reading data, error message: CSV table encountered too many errors, giving up. Rows: 1; errors: 1. Error detected while parsing row starting at position: X. Error: UTF-8 decoding error."
+- **Cause**: The CSV file is not encoded in UTF-8, which is the default expected by BigQuery.
+- **Resolution**:
+  1. **Convert CSV to UTF-8**: Before uploading, convert your CSV file to UTF-8 encoding. You can use text editors (like VS Code, Notepad++ "Convert to UTF-8") or command-line tools (like iconv).
+  2. **Specify Encoding (Python)**:
+     - When reading with Pandas: `pd.read_csv(csv_file_path, encoding = 'your-actual-encoding')` then save it as UTF-8 before passing to BigQuery, or let pandas-gbq handle it if the DataFrame is correctly loaded.
+     - google-cloud-bigquery: The LoadJobConfig has an eocnding property (e.g., job_config.encoding = "UTF-8: or other encodings like ISO-8859-1 if absolutely necessary, though UTF-8 is strongly preferred).
+
+**4.4.4. Quoting and Delimiter Issues**:
+- **Error Message (Example)**: "Too many values in row X." or fields being incorrectly split or merged.
+- **Cause**:
+  - Fields containing the delimiter (e.g., a comma withing a text field) are not properly quoted.
+  - Fields containing newline characters are not properly quoted and allow_quoted_newlines is not enabled.
+  - Incorrect field delimiter specified.
+- **Resolution**:
+  - **Ensure Proper Quoting**: Fields containing the delimiter, quotes, or newlines should be enclosed in double quotes (e.g., "this, field, has, commas"). Double quotes within a quoted field should be escaped (usually by another double quote, e.g., "He said ""Hello"".").
+  - **Set allowed_quoted_newlines**: If your CSV data has newlines within quoted fields, enable this option in the GCP console or set `job_config.allow_quoted_newlines = True` in Python.
+  - **Verify Field Delimiter**: Ensure the correct delimiter is specified (usually comma, but could be tab, pipe, etc.).
+ 
+------------
+
+
+#### 5. Revision History
+| Version  | Date  | Author  | Changes  |
+| ------------ | ------------ | ------------ | ------------ |
+| 1.0  | 29th May 2025  | Naitik Shah  | Initial Draft  |
