@@ -167,7 +167,7 @@ This library provides a high-level interface for interacting with BigQuery throu
  	except Exception as e:
  		print(f"Error uploading data to BigQuery: {e}")
 
- 	# --- Optionally verify your data ---
+ 	# --- Optionally to verify your data ---
  	try:
  		query = f"SELECT * FROM `{project_id}.{full_table_id}' LIMIT 5"
  		df_from_bgq = read_bgq(query, project_id = project_id)
