@@ -243,4 +243,35 @@ Same as for pandas-gbq
  	# job_config.allow_jagged_rows = True # Optional Allow missing trailing optional columns
  	# job_config.allow_quoted_newlines = True # Optional Allow quoted data containing newline characters (CSV only)
 
- 	# --- Load Data 
+ 	# --- Load Data from CSV file ---
+ 	try:
+ 		with open(csv_file_path, "rb") as source_file:
+ 			print(f"\nStarting load job for '{csv_file_path}' into BigQuery table: {full_table_id_str}")
+ 			load_job = client.load_table_from_file(
+ 				source_file,
+ 				table_ref,
+ 				job_config = job_config
+ 			)
+ 			print(f"Load job {load_job.job-id} submitted.")
+ 			load_job.result() # Waits for the job to complete
+ 			print(f"Load job completed. Loaded {load_job.output_rows} rows to {full_table_id_str}.")
+ 	except FileNotFoundError:
+ 		print(f"Error: CSV file not found at '{csv_file_path}'")
+ 	except Exception as e:
+ 		print(f"Error during BigQuery load job: {e}")
+ 		if hasattr(e, 'errors') and e.errors:
+ 			for error in e.errors:
+ 				print(f" -Reason: {error.get('reason')}, Location: {error.get('location')}, Message: {error.get('message')}")
+
+ 	# --- (Optional) Verify by Querying data ---
+ 	try:
+ 		query = f"SELECT * FROM `{full_table_id_str}` LIMIT 5"
+ 		query_job = client.query(query)
+ 		results = query_job.results() # Waits for the job to complete
+ 		print("\nFirst 5 rows from BigQuery table:")
+ 		for row in results:
+ 			print(row)
+ 		except Exception as e:
+ 			print(f"Error querying data from BigQuery: {e}")
+ 
+4. **Run the script**: Save the above script, ensuring `.py` extension and then execute by running `python your_script_name.py` in the terminal (Make sure you have navigated to the file directory in the terminal before executing the above command.
