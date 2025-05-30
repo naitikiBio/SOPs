@@ -108,7 +108,19 @@ This library provides a high-level interface for interacting with BigQuery throu
         gcloud auth application-default login
         ```
      3. Browser-based authentication: This command will typically open a web browser and redirect you to a Google sign-in page.
-     4. Sign in 
+     4. Sign in with your Google account: Choose the Google account you want to use for accessing your Google Cloud resources. This account should have the necessary permissions for the tasks you intend to perform.
+     5. Grant access to the Google Cloud CLI: You will be asked to grant the Google Cloud CLI permission to access your Google account. Review the requested permissions and click "Allow" if you agree.
+     6. Credentials stored locally: Once you've succesffuly signed in and granted access, the Google Cloud CLI will download and store your authentication credentials on your local machine. The location of this file depends on your operating system:
+        - Linux/macOS: `~/.config/gcloud/application_default_credentials.json`
+        - Windows: `%APPDATA%\gcloud\application_default_credentials.json`
+     7. Verification (optional): You can verify that the credentials have been set by running the following command:
+        ```bash
+        gcloud auth application-default print-access-token
+        ```
+        This command should output a long string, which is your access token.
+     When to use it:
+	- Local development and testing: This is the most common way to authenticate when you are running code on your local machine that needs to access Google Cloud.
+	- One-time setup: You typically only need to run this command once unless your credentials expire or you want to use a different Google account.
 4.  **Python Script**:
 	```python
 	import pandas as pd
