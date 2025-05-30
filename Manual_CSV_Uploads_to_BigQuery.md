@@ -136,7 +136,14 @@ This library provides a high-level interface for interacting with BigQuery throu
         - Click CREATE KEY.
         - Choose JSON as the Key type.
         - Click CREATE. This will download a JSON file containing your service account's private key to your local machine. Keep this file secure.
-       	  
+     2. **Identify the path to your service account key file**: Note the exact location where you saved the downloaded JSON key file. For example: `/path/to/your/service-account-key.json`.
+     3. **Set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable**:
+        - **Linux/macOS**:
+          ```bash
+          export GOOGLE_APPLICATION_CREDENTIALS = "/path/to/your/service-account-key.json"
+          ```
+          Replace `/path/to/your/service-account-key.json` with the actual path to your key file. This setting is usually temporary for the current terminal session. To make it permanent, you can add this line to your shell's configuration file (e.g., `~/.bashrc`, `~/.zshrc`).
+	  
 3.  **Python Script**:
 	```python
 	import pandas as pd
