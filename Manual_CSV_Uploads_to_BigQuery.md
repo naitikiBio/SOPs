@@ -121,7 +121,23 @@ This library provides a high-level interface for interacting with BigQuery throu
      - When to use it:
        	- Local development and testing: This is the most common way to authenticate when you are running code on your local machine that needs to access Google Cloud.
        	- One-time setup: You typically only need to run this command once unless your credentials expire or you want to use a different Google account.
-4.  **Python Script**:
+
+   - **Method 2**: Setting the `GOOGLE_APPLICATION_CREDENTIALS` environment variable
+     This method explicitly tells your application where to find the service account key file. Service accounts are non-human accounts that applications can use to authenticate. This method is particularly useful in production environments or when you want to use a specific service account for authentication.
+     **Step-by-Step Explanation**:
+     1. **Create a service account (if you haven't already)**:
+        - Go to the Google Cloud Console
+        - Navigate to IAM & Admin > Service accounts.
+        - Click + CREATE SERVICE ACCOUNT.
+        - Enter a service account name, ID, and description (optional).
+        - Click CREATE AND CONTINUE.
+        - Grant the service account the necessary roles for the resources it needs to access.
+        - Click CONTINUE.
+        - Click CREATE KEY.
+        - Choose JSON as the Key type.
+        - Click CREATE. This will download a JSON file containing your service account's private key to your local machine. Keep this file secure.
+       	  
+3.  **Python Script**:
 	```python
 	import pandas as pd
 	from pandas_gbq import to_gbq, read_gbq
@@ -199,7 +215,7 @@ This library provides a high-level interface for interacting with BigQuery throu
 	```
  	
 
- 5. **Run the script**: Save the above script and then execute `python your_script_name.py` in your terminal (make sure you are in the directory in the terminal where your script is saved)
+ 4. **Run the script**: Save the above script and then execute `python your_script_name.py` in your terminal (make sure you are in the directory in the terminal where your script is saved)
 
 **4.3.2. Using google-cloud-bigquery**
 
