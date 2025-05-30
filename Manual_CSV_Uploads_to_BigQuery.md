@@ -143,8 +143,33 @@ This library provides a high-level interface for interacting with BigQuery throu
           export GOOGLE_APPLICATION_CREDENTIALS = "/path/to/your/service-account-key.json"
           ```
           Replace `/path/to/your/service-account-key.json` with the actual path to your key file. This setting is usually temporary for the current terminal session. To make it permanent, you can add this line to your shell's configuration file (e.g., `~/.bashrc`, `~/.zshrc`).
-	  
-3.  **Python Script**:
+        - **Windows (Command Prompt)**:
+          ```bash
+          set GOOGLE_APPLICATION_CREDENTIALS = "C:\path\to\your\service-account-key.json"
+          ```
+          Replace `C:\path\to\your\service-account-key.json` with the actual path. This is also typically temporary. To make it permanent, you can use the `setx` command:
+          ```bash
+          setx GOOGLE_APPLICATION_CREDENTIALS "C:\path\to\your\service-account-key.json"
+          ```
+          Note that changes made with `setx` might require restarting your command prompt or even your system to take effect.
+        - **Windows (PowerShell)**:
+          ```bash
+          $env: GOOGLE_APPLICATION_CREDENTIALS = "C:\path\to\your\service-account-key.json"
+          ```
+          To make it persistent, you can add this line to your PowerShell profile.
+    4. **Run your application or `gcloud` commands**: Once the environment variable is set, your application or the `gcloud` CLI will automatically look athe specified path for the service account key file and use it for authentication.
+
+    **When to use it**:
+      - **Production environments**: This is a common way to authenticate applications running on virtual machines, containers, or other server environments.
+      - **Automated tasks and scripts**: When you need to run scripts or automated processes that interact with Google Cloud without human intervention.
+      - **Specific service account permissions**: When your application needs to operate with a defined set of permissions granted to a service account.
+
+    **Important Security Considerations:**
+      - **Never store service account key files in your code repository.**
+      - **Restrict access to the service account key file on your systems.**
+      - **Grant service accounts only the necessary permissions (principle of least privilege).**
+      - 
+4.  **Python Script**:
 	```python
 	import pandas as pd
 	from pandas_gbq import to_gbq, read_gbq
@@ -222,7 +247,7 @@ This library provides a high-level interface for interacting with BigQuery throu
 	```
  	
 
- 4. **Run the script**: Save the above script and then execute `python your_script_name.py` in your terminal (make sure you are in the directory in the terminal where your script is saved)
+ 5. **Run the script**: Save the above script and then execute `python your_script_name.py` in your terminal (make sure you are in the directory in the terminal where your script is saved)
 
 **4.3.2. Using google-cloud-bigquery**
 
