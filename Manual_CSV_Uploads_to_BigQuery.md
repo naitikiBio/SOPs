@@ -119,8 +119,8 @@ This library provides a high-level interface for interacting with BigQuery throu
         ```
         This command should output a long string, which is your access token.
      - When to use it:
-	- Local development and testing: This is the most common way to authenticate when you are running code on your local machine that needs to access Google Cloud.
-	- One-time setup: You typically only need to run this command once unless your credentials expire or you want to use a different Google account.
+       	- Local development and testing: This is the most common way to authenticate when you are running code on your local machine that needs to access Google Cloud.
+       	- One-time setup: You typically only need to run this command once unless your credentials expire or you want to use a different Google account.
 4.  **Python Script**:
 	```python
 	import pandas as pd
