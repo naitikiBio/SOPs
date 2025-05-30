@@ -100,7 +100,16 @@ This method is suitable for automated workflows, larger files (though direct GCS
 This library provides a high-level interface for interacting with BigQuery through Pandas DataFrames.
 1.  **Installation**:
 	Install the required dependencies if not (refer to the start of this SOP)
-2.  **Python Script**:
+2. **Authentication**: Ensure you are authenticated, if not follow either of these methods
+   - **Method 1**: `gcloud auth application-default login`
+     1. Install Google Cloud CLI (`gcloud`) on your system by following these steps: https://cloud.google.com/sdk/docs/install#windows (Ensure you are following the steps for your OS)
+     2. Open your terminal or command prompt and run the following command:
+        ```bash
+        gcloud auth application-default login
+        ```
+     3. Browser-based authentication: This command will typically open a web browser and redirect you to a Google sign-in page.
+     4. Sign in 
+4.  **Python Script**:
 	```python
 	import pandas as pd
 	from pandas_gbq import to_gbq, read_gbq
@@ -178,7 +187,7 @@ This library provides a high-level interface for interacting with BigQuery throu
 	```
  	
 
- 4. **Run the script**: Save the above script and then execute `python your_script_name.py` in your terminal (make sure you are in the directory in the terminal where your script is saved)
+ 5. **Run the script**: Save the above script and then execute `python your_script_name.py` in your terminal (make sure you are in the directory in the terminal where your script is saved)
 
 **4.3.2. Using google-cloud-bigquery**
 
