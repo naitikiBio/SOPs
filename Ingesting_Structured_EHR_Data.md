@@ -6,3 +6,9 @@ To define the standard procedures for ingesting structured Electronic Health Rec
 
 2. #### Scope
 This SOP applies to all personnel, systems, and processes involved in the planning, development, execution, and maintenance of structured EHR data ingestion within the organization.
+
+3. #### Definitions
+	- **EHR**: Electronic Health Record - A digital version of a patient's paper chart.
+	- **FHIR**: Fast Healthcare Interoperability Resources - A standard describing data formats and elements (known as "resources") and an Application Programming Interface (API) for exchanging electronic health records.
+	- **PHI**: Protected Health Information - Individually identifiable health information that is transmitted or maintained in any form or medium (electronic, oral, or paper) by a covered entity or its business associates.
+	- **HIPAA**: Health Insurance Portability and Accountability Act of 1996 - A US federal law designed to provide privacy standards to protect patients' medical records and other health information.
