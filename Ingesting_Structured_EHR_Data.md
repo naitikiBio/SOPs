@@ -12,3 +12,9 @@ This SOP applies to all personnel, systems, and processes involved in the planni
 	- **FHIR**: Fast Healthcare Interoperability Resources - A standard describing data formats and elements (known as "resources") and an Application Programming Interface (API) for exchanging electronic health records.
 	- **PHI**: Protected Health Information - Individually identifiable health information that is transmitted or maintained in any form or medium (electronic, oral, or paper) by a covered entity or its business associates.
 	- **HIPAA**: Health Insurance Portability and Accountability Act of 1996 - A US federal law designed to provide privacy standards to protect patients' medical records and other health information.
+
+4. #### Procedures
+4.1. **Data Identification and Understanding FHIR Data Types**
+	1. **Identify Source Systems**:
+		- Document the source EHR systems from which data will be ingested.
+		- Determine the capabilities of source systems to export data in FHIR format or other structured formats that can be transformed into FHIR.
