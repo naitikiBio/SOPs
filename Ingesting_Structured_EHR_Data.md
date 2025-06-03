@@ -15,6 +15,6 @@ This SOP applies to all personnel, systems, and processes involved in the planni
 
 4. #### Procedures
 4.1. **Data Identification and Understanding FHIR Data Types**
-	1. **Identify Source Systems**:
-		- Document the source EHR systems from which data will be ingested.
-		- Determine the capabilities of source systems to export data in FHIR format or other structured formats that can be transformed into FHIR.
+1. **Identify Source Systems**:
+   - Document the source EHR systems from which data will be ingested
+   - Determine the capabilities of source systems to export data in FHIR format or other structured formats that can be transformed into FHIR.
