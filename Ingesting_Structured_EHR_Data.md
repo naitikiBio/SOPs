@@ -18,3 +18,11 @@ This SOP applies to all personnel, systems, and processes involved in the planni
 1. **Identify Source Systems**:
    - Document the source EHR systems from which data will be ingested
    - Determine the capabilities of source systems to export data in FHIR format or other structured formats that can be transformed into FHIR.
+2. **Understand Key FHIR Resources**:
+   - FHIR organizes data into "Resources." Common resources relevant to EHR data ingestion include:
+     - **Patient**: Demographic and administrative information about an individual receiving care.
+       - _Key fields_: id, identifier (e.g., MRN), name, gender, birthDate, address, telecom (contact info), managingOrganization.
+     - **Observation**: Measurements and simple assertions made about a patient.
+       - _Key fields_: id, status, category, code (what is being observed, e.g., LOINC code for blood pressure), subject (reference to Patient), effectiveDateTime or effectivePeriod, value[x] (e.g., valueQuantity, valueCodeableConcept, valueString).
+     - **Encounter**: An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient.
+       - _Key fields_: id, status, class, type, subject (reference to Patient), participant (involved practitioners), period.
