@@ -26,3 +26,5 @@ This SOP applies to all personnel, systems, and processes involved in the planni
        - _Key fields_: id, status, category, code (what is being observed, e.g., LOINC code for blood pressure), subject (reference to Patient), effectiveDateTime or effectivePeriod, value[x] (e.g., valueQuantity, valueCodeableConcept, valueString).
      - **Encounter**: An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient.
        - _Key fields_: id, status, class, type, subject (reference to Patient), participant (involved practitioners), period.
+     - **Condition**: A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern.
+       - _Key fields_: id, clinicalStatus, verificationStatus, category, code, subject (reference to Patient), onsetDateTime or onsetAge.
