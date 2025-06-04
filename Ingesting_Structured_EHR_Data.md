@@ -31,3 +31,40 @@ This SOP applies to all personnel, systems, and processes involved in the planni
      - **MedicationRequest**: An order or request for both supply of the medication and the instructions for administration of the medication to a patient.
        - _Key fields_: id, status, intent, medicationCodeableConcept or medicationReference, subject (reference to Patient), authoredOn, requester.
    - Familiarize with the structure and common elements of these resources as defined in the official HL7 FHIR specification.
+
+4.2 **Data Ingestion using Python and fhirclient**
+1. **Set up Python Environment**:
+   - Ensure a supported version of Python is installed. (If unsure how to, refer to this SOP: https://github.com/naitikiBio/SOPs/blob/main/Ingesting_Data_From_APIs.md)
+   - Use virtual environments (e.g., venv, conda) to manage project dependencies.
+2. **Install fhirclient library**:
+   ```bash
+   pip install fhirclient
+   ```
+3. **Connect to a FHIR Server**:
+   - The fhirclient library facilitates interaction with FHIR servers.
+   - Configuration settings include the FHIR server's base URL (api_base) and, if applicable, application identifiers (app_id).
+   - **Example for an open FHIR server**:
+     ```python
+     from fhirclient import client
+
+     settings = {
+     	'app_id': 'my_ehr_ingestion_app',
+     	'api_base': 'https://your-fhir-server-base-url/fhir' # Replace with actual FHIR server URL
+     }
+     smart = client.FHIRClient(settings = settings)
+     ```
+   - **For protected servers (requiring OAuth2 authentication)**:
+     - The fhirclient supports SMART on FHIR authentication. This typically involves redirecting a user for authorization or using backend service authentication if supported by the FHIR server.
+     - Refer to fhirclient documentation for detailed OAuth2 setup. Ensure secure handling of client credentials.
+     - smart.prepare() can be used to check if authorization is needed. smart.ready indicates if the client is ready to make requests.
+4. **Reading FHIR Resources**:
+   - **Fetch a specific resource by ID**:
+     ```python
+     import fhirclient.models.patient as p
+     try:
+     	patient = p.Patient.read('patient_id_example', smart.server) # Replace 'patient_id_example'
+     	print(patient.name[0].given)
+     	# Process patient data
+     except Exception as e:
+     	print(f"Error reading patient: {e}")
+     ```
