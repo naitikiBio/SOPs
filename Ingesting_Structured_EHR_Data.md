@@ -28,3 +28,6 @@ This SOP applies to all personnel, systems, and processes involved in the planni
        - _Key fields_: id, status, class, type, subject (reference to Patient), participant (involved practitioners), period.
      - **Condition**: A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern.
        - _Key fields_: id, clinicalStatus, verificationStatus, category, code, subject (reference to Patient), onsetDateTime or onsetAge.
+     - **MedicationRequest**: An order or request for both supply of the medication and the instructions for administration of the medication to a patient.
+       - _Key fields_: id, status, intent, medicationCodeableConcept or medicationReference, subject (reference to Patient), authoredOn, requester.
+   - Familiarize with the structure and common elements of these resources as defined in the official HL7 FHIR specification.
