@@ -57,3 +57,30 @@ This SOP applies to all personnel, systems, and processes involved in the planni
      - The fhirclient supports SMART on FHIR authentication. This typically involves redirecting a user for authorization or using backend service authentication if supported by the FHIR server.
      - Refer to fhirclient documentation for detailed OAuth2 setup. Ensure secure handling of client credentials.
      - smart.prepare() can be used to check if authorization is needed. smart.ready indicates if the client is ready to make requests.
+4. **Reading FHIR Resources**:
+   - **Fetch a specific resource by ID**:
+     ```python
+     import fhirclient.models.patient as p
+     try:
+     	patient = p.Patient.read('patient_id_example', smart.server) # Replace 'patient_id_example'
+     	print(patient.name[0].given)
+     	# Process patient data
+     except Exception as e:
+     	print(f"Error reading patient: {e}")
+     ```
+
+   - **Search for resources**:
+     ```python
+     import fhirclient.models.observation as o
+     try:
+     	search = o.Observation.where(struct = {
+     		'subject': 'Patient/patient_id_example', # Replace 'patient_id_example'
+     		'code': 'http://lonic.org/8302-2' # Example: LONIC code for Body Height
+     	})
+     	observations = search.perform_resources(smart.server)
+     	for obs in observations:
+     		if obs.valueQuantity:
+     			print(f"Observation: {obs.code.text}, Value: {obs.valueQuantity.value} {obs.valueQuantity.unit}")
+     		# Process observation data
+     except Exception as e:
+     	print(f"Error searching observations: {e}")
