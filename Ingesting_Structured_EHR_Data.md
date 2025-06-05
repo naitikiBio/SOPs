@@ -84,3 +84,4 @@ This SOP applies to all personnel, systems, and processes involved in the planni
      		# Process observation data
      except Exception as e:
      	print(f"Error searching observations: {e}")
+5. **Creating/Updating FHIR Resources (if applicable to ingestion workflow)**:
