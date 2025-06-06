@@ -141,3 +141,5 @@ This SOP applies to all personnel, systems, and processes involved in the planni
    - The plan should include procedures for detection, containment, eradication, recovery, and post-incident analysis, as well as breach notification procedures as per HIPAA.
 9. **Employee Training**:
     - All personnel handling PHI must receive regular training on HIPAA requirements, PHI security, and organizational policies and procedures.
+5.3.2. **Technical Safeguards (as per HIPAA Security Rule)**
+1. **Unique User Identification (Required)**: Assign a unique name and/or number for identifying and tracking user identity.
