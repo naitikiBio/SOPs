@@ -111,3 +111,13 @@ This SOP applies to all personnel, systems, and processes involved in the planni
    - Implement robust error handling (e.g., try-except blocks) for API requests, data parsing, and validation.
    - Log errors comprehensively, including timestamps, error messages, and relevant context (e.g., resource ID, query parameters).
    - Implement retry mechanisms for transient network errors, with exponential backoff.
+5.3. **PHI and HIPAA Compliance Considerations**
+5.3.1. **General Principles**
+1. **Minimum Necessary Rule**: Access, use, and disclose only the minimum necessary PHI to accomplish the intended purpose of the data ingestion.
+2. **Access Controls (RBAC)**:
+   - Implement RBAC to ensure that only authorized personnel have access to PHI.
+   - Permissions should be granted based on job roles and responsibilities.
+   - Regularly review and update access permissions.
+3. **Data Encryption**:
+   - **At Rest**: All PHI stored in databases, file systems, or object storage must be encrypted using strong encryption algorithms (e.g., AES-256).
+   - **In Transit**: All PHI transmitted over networks (internal or external) must be encrypted using secure protocols (e.g., TLS 1.2+). This includes data transfer between the EHR source, ingestion scripts, and storage systems.
