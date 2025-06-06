@@ -143,3 +143,4 @@ This SOP applies to all personnel, systems, and processes involved in the planni
     - All personnel handling PHI must receive regular training on HIPAA requirements, PHI security, and organizational policies and procedures.
 5.3.2. **Technical Safeguards (as per HIPAA Security Rule)**
 1. **Unique User Identification (Required)**: Assign a unique name and/or number for identifying and tracking user identity.
+2. **Authentication (Required)**: Implement procedures to verify that a person or entity seeking access to PHI is the one claimed. This includes strong password policies and multi-factor authentication (MFA) where appropriate.
