@@ -85,3 +85,25 @@ This SOP applies to all personnel, systems, and processes involved in the planni
      except Exception as e:
      	print(f"Error searching observations: {e}")
 5. **Creating/Updating FHIR Resources (if applicable to ingestion workflow)**:
+   - While ingestion primarily involves reading, if the workflow requires creating or updating resources (e.g., transforming and storing data in a FHIR-compliant repository):
+     ```python
+     # Example: Creating a new patient resource (simplified)
+     # Ensure all required fields are populated according to FHIR specs and profiles
+     from fhirclient.models.humanname import HumanName
+     from fhirclient.models.identifier import Identifier
+
+     patient_data = {
+     	"resourceType": "Patient",
+     	"identifier": [{"system": "urn:ietf:rfc:3986", "value": "some_unique_id"}],
+     	"name": [{"use": "official", "family": "Doe", "given": ["John"]}],
+     	"gender": "male",
+     	"birthDate": "1970-01-01"
+     }
+     new_patient = p.Patient(patient_data)
+     try:
+     	response = new_patient.create(smart.server)
+     	print(f"Patient created with ID: {response.id}")
+     except Exception as e:
+     	print(f"Error creating patient: {e}")
+
+   - Always validate resources against FHIR profiles before creation/update.
