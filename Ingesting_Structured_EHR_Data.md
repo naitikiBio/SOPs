@@ -131,3 +131,5 @@ This SOP applies to all personnel, systems, and processes involved in the planni
      - **Safe Harbor**: Removal of 18 specific identifiers.
      - **Expert Determination**: A qualified statistician or expert determines that the risk of re-identification is very small.
    - Document the de-identification method used.
+6. **Business Associate Agreements (BAAs)**:
+   - Ensure a signed BAA is in place with all third-party vendors (including cloud service providers like Google) that will create, receive, maintain, or transmit PHI on behalf of the organization.
