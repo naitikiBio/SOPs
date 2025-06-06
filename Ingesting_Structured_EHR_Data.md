@@ -139,3 +139,5 @@ This SOP applies to all personnel, systems, and processes involved in the planni
 8. **Incident Response Plan**:
    - Develop and maintain an incident response plan to address potential breaches of PHI.
    - The plan should include procedures for detection, containment, eradication, recovery, and post-incident analysis, as well as breach notification procedures as per HIPAA.
+9. **Employee Training**:
+    - All personnel handling PHI must receive regular training on HIPAA requirements, PHI security, and organizational policies and procedures.
