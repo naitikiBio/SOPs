@@ -107,3 +107,7 @@ This SOP applies to all personnel, systems, and processes involved in the planni
      	print(f"Error creating patient: {e}")
 
    - Always validate resources against FHIR profiles before creation/update.
+6. **Error Handling**:
+   - Implement robust error handling (e.g., try-except blocks) for API requests, data parsing, and validation.
+   - Log errors comprehensively, including timestamps, error messages, and relevant context (e.g., resource ID, query parameters).
+   - Implement retry mechanisms for transient network errors, with exponential backoff.
