@@ -133,3 +133,9 @@ This SOP applies to all personnel, systems, and processes involved in the planni
    - Document the de-identification method used.
 6. **Business Associate Agreements (BAAs)**:
    - Ensure a signed BAA is in place with all third-party vendors (including cloud service providers like Google) that will create, receive, maintain, or transmit PHI on behalf of the organization.
+7. **Secure Storage and Transmission**:
+   - Store PHI in secure, access-controlled environments.
+   - Use secure methods for transmitting PHI (e.g., SFTP, VPN, HTTPS).
+8. **Incident Response Plan**:
+   - Develop and maintain an incident response plan to address potential breaches of PHI.
+   - The plan should include procedures for detection, containment, eradication, recovery, and post-incident analysis, as well as breach notification procedures as per HIPAA.
