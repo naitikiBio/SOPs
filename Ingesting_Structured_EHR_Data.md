@@ -121,3 +121,13 @@ This SOP applies to all personnel, systems, and processes involved in the planni
 3. **Data Encryption**:
    - **At Rest**: All PHI stored in databases, file systems, or object storage must be encrypted using strong encryption algorithms (e.g., AES-256).
    - **In Transit**: All PHI transmitted over networks (internal or external) must be encrypted using secure protocols (e.g., TLS 1.2+). This includes data transfer between the EHR source, ingestion scripts, and storage systems.
+4. **Audit Trails and Logging**:
+   - Maintained detailed audit logs of all access, creation, modification, and deletion of PHI.
+   - Logs should include user identification, date, time, and specific data accessed/modified.
+   - Regularly review audit logs for suspicious activity.
+5. **De-identification**:
+   - If PHI is to be used for research, analytics, or other secondary purposes where direct identifiers are not needed, de-identify the data.
+   - HIPAA provides two methods for de-identification:
+     - **Safe Harbor**: Removal of 18 specific identifiers.
+     - **Expert Determination**: A qualified statistician or expert determines that the risk of re-identification is very small.
+   - Document the de-identification method used.
