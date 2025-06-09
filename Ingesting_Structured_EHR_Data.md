@@ -115,12 +115,12 @@ This SOP applies to all personnel, systems, and processes involved in the planni
 5.3.1. **General Principles**
 	1. **Minimum Necessary Rule**: Access, use, and disclose only the minimum necessary PHI to accomplish the intended purpose of the data ingestion.
 	2. **Access Controls (RBAC)**:
-   	- Implement RBAC to ensure that only authorized personnel have access to PHI.
-   	- Permissions should be granted based on job roles and responsibilities.
-   	- Regularly review and update access permissions.
-3. **Data Encryption**:
-   - **At Rest**: All PHI stored in databases, file systems, or object storage must be encrypted using strong encryption algorithms (e.g., AES-256).
-   - **In Transit**: All PHI transmitted over networks (internal or external) must be encrypted using secure protocols (e.g., TLS 1.2+). This includes data transfer between the EHR source, ingestion scripts, and storage systems.
+   		- Implement RBAC to ensure that only authorized personnel have access to PHI.
+   		- Permissions should be granted based on job roles and responsibilities.
+   		- Regularly review and update access permissions.
+	3. **Data Encryption**:
+   		- **At Rest**: All PHI stored in databases, file systems, or object storage must be encrypted using strong encryption algorithms (e.g., AES-256).
+   		- **In Transit**: All PHI transmitted over networks (internal or external) must be encrypted using secure protocols (e.g., TLS 1.2+). This includes data transfer between the EHR source, ingestion scripts, and storage systems.
 4. **Audit Trails and Logging**:
    - Maintained detailed audit logs of all access, creation, modification, and deletion of PHI.
    - Logs should include user identification, date, time, and specific data accessed/modified.
