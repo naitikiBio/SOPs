@@ -13,3 +13,13 @@ from airflow.utils.email import send_email
 # Define configurable parameters for your ETL DAG.
 # These can be accessed within tasks using config["key_name"].
 # For dynamic values like execution date, Airflow Jinja templating is used.
+config = {
+  "source_system_name": "crm_data", # Example: Name of the source system
+  "target_dataset_name": "data_warehouse", # Example: Target BigQuery dataset or database schema
+  "target_table_prefix": "stg_", # Prefix for staging tables
+  "gcs_bucket_name": "your-etl-data-bucket", # Your Google Cloud Storage bucket
+  "raw_data_path_template": "raw_data/{{ ds_nodash }}/{{ source_system_name }}/",
+  "processed_data_path_template": "processed_data/{{ ds_nodash }}/{{ source_system_name }}/",
+  "email_on_failure": ["your_email@example.com"], # Email recipient for failure alerts
+  "slack_webhook_url": None, # Optional: Slack webhook URL for notifications
+}
