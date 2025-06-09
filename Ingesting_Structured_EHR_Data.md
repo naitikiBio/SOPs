@@ -187,3 +187,16 @@ When using GCP for ingesting and storing EHR data:
    - Ensure log retention policies meet HIPAA requirements and organizational needs.
 7. **Data Loss Prevention (DLP) API**:
    - Consider using the Cloud DLP API to discover, classify, and redact sensitive PHI within data stores like Cloud Storage or BigQuery, or in data streams.
+8. **Secure Data Storage**:
+   - **Cloud Storage**:
+     - Apply fine-grained access controls (IAM permissions, ACLs).
+     - Enable object versioning and retention policies.
+     - Use bucket lock for WORM (Write Once, Read Many) compliance if needed.
+   - **BigQuery**:
+     - Control access at the dataset, table, and column levels using IAM.
+     - Consider authorized views to restrict access to specific data subsets.
+9. **Assured Workloads**:
+    - For organizations with stringent compliance needs, Assured Workloads for Government (if applicable) or other regions can provide environments with additional controls and support for compliance regimes like FedRAMP, which can complement HIPAA efforts.
+10. **Configuration Management**:
+    - Use tools like Infrastructure as Code (e.g., Terraform, Cloud Deployment Manager) to manage and version GCP resource configurations, ensuring consistency and auditability.
+    - Regularly audit configurations for compliance with security best practices.
