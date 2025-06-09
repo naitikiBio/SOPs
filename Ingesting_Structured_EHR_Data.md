@@ -169,3 +169,5 @@ When using GCP for ingesting and storing EHR data:
    - Use **Workforce Identity Federation** or **Cloud Identity** for managing user identities.
 4. **Data Encryption on GCP**:
    - **Encryption at Rest**: GCP encrypts data at rest by default.
+   - **Customer-Managed Encryption Keys (CMEK)**: For enhanced control, consider using CMEK with Cloud Key Management Service (Cloud KMS) for services like Cloud Storage, BigQuery, and Compute Engine persistent disks.
+   - **Encryption in Transit**: Data transferred to and between GCP services is encrypted by default (TLS). Ensure client applications also use TLS for connections to GCP APIs.
