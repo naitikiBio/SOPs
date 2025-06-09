@@ -1,20 +1,20 @@
 ### Ingesting Structured EHR Data
 Version 1.0 Effective Data: 6/2/2025 Author: Naitik Shah
 
-1.  #### Purpose
+1.  ### Purpose
 To define the standard procedures for ingesting structured Electronic Health Record (EHR) data using Fast Healthcare Interoperability Resources (FHIR) standards and Python. This SOP aims to ensure the integrity, security, and confidentiality of Protected Health Information (PHI) in compliance with the Health Insurance Portability and Accountability Act (HIPAA) regulations, including specific considerations for Google Cloud Platform (GCP) environments.
 
-2. #### Scope
+2. ### Scope
 This SOP applies to all personnel, systems, and processes involved in the planning, development, execution, and maintenance of structured EHR data ingestion within the organization.
 
-3. #### Definitions
+3. ### Definitions
 	- **EHR**: Electronic Health Record - A digital version of a patient's paper chart.
 	- **FHIR**: Fast Healthcare Interoperability Resources - A standard describing data formats and elements (known as "resources") and an Application Programming Interface (API) for exchanging electronic health records.
 	- **PHI**: Protected Health Information - Individually identifiable health information that is transmitted or maintained in any form or medium (electronic, oral, or paper) by a covered entity or its business associates.
 	- **HIPAA**: Health Insurance Portability and Accountability Act of 1996 - A US federal law designed to provide privacy standards to protect patients' medical records and other health information.
 
-4. #### Procedures
-4.1. **Data Identification and Understanding FHIR Data Types**
+### 4. Procedures
+#### 4.1. **Data Identification and Understanding FHIR Data Types**
 1. **Identify Source Systems**:
    - Document the source EHR systems from which data will be ingested
    - Determine the capabilities of source systems to export data in FHIR format or other structured formats that can be transformed into FHIR.
@@ -32,7 +32,7 @@ This SOP applies to all personnel, systems, and processes involved in the planni
        - _Key fields_: id, status, intent, medicationCodeableConcept or medicationReference, subject (reference to Patient), authoredOn, requester.
    - Familiarize with the structure and common elements of these resources as defined in the official HL7 FHIR specification.
 
-4.2 **Data Ingestion using Python and fhirclient**
+#### 4.2 **Data Ingestion using Python and fhirclient**
 1. **Set up Python Environment**:
    - Ensure a supported version of Python is installed. (If unsure how to, refer to this SOP: https://github.com/naitikiBio/SOPs/blob/main/Ingesting_Data_From_APIs.md)
    - Use virtual environments (e.g., venv, conda) to manage project dependencies.
@@ -111,8 +111,8 @@ This SOP applies to all personnel, systems, and processes involved in the planni
    - Implement robust error handling (e.g., try-except blocks) for API requests, data parsing, and validation.
    - Log errors comprehensively, including timestamps, error messages, and relevant context (e.g., resource ID, query parameters).
    - Implement retry mechanisms for transient network errors, with exponential backoff.
-#### 5.3. **PHI and HIPAA Compliance Considerations**
-#### 5.3.1. **General Principles**
+#### 4.3. **PHI and HIPAA Compliance Considerations**
+#### 4.3.1. **General Principles**
 1. **Minimum Necessary Rule**: Access, use, and disclose only the minimum necessary PHI to accomplish the intended purpose of the data ingestion.
 2. **Access Controls (RBAC)**:
    - Implement RBAC to ensure that only authorized personnel have access to PHI.
@@ -141,12 +141,12 @@ This SOP applies to all personnel, systems, and processes involved in the planni
    - The plan should include procedures for detection, containment, eradication, recovery, and post-incident analysis, as well as breach notification procedures as per HIPAA.
 9. **Employee Training**:
     - All personnel handling PHI must receive regular training on HIPAA requirements, PHI security, and organizational policies and procedures.
-#### 5.3.2. **Technical Safeguards (as per HIPAA Security Rule)**
+#### 4.3.2. **Technical Safeguards (as per HIPAA Security Rule)**
 1. **Unique User Identification (Required)**: Assign a unique name and/or number for identifying and tracking user identity.
 2. **Authentication (Required)**: Implement procedures to verify that a person or entity seeking access to PHI is the one claimed. This includes strong password policies and multi-factor authentication (MFA) where appropriate.
 3. **Authorization Mechanisms (Required)**: Implement policies and procedures for granting access to PHI, such as through RBAC.
 4. **Data Backup and Disaster Recovery (Required)**: Establish and implement procedures to create and maintain retrievable exact copies of PHI. Have a disaster recovery plan to restore any loss of data.
-#### 5.4. GCP-specific Considerations for PHI and HIPAA
+#### 4.4. GCP-specific Considerations for PHI and HIPAA
 When using GCP for ingesting and storing EHR data:
 1. **Business Associate Agreement (BAA) with Google Cloud**:
    - Ensure a BAA is executed with Google Cloud. This agreement outlines Google's responsibilities for protecting PHI.
@@ -200,7 +200,7 @@ When using GCP for ingesting and storing EHR data:
 10. **Configuration Management**:
     - Use tools like Infrastructure as Code (e.g., Terraform, Cloud Deployment Manager) to manage and version GCP resource configurations, ensuring consistency and auditability.
     - Regularly audit configurations for compliance with security best practices.
-#### 6. Data Handling and Security (General)
+### 5. Data Handling and Security (General)
 1. **Credentials Management**:
    - Securely manage API keys, service account keys, and other credentials.
    - Do not hardcode credentials in scripts. Use environment variables, secret management services (e.g., Google Cloud Secret Manager), or workload identity federation.
