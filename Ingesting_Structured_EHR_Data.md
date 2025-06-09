@@ -171,3 +171,14 @@ When using GCP for ingesting and storing EHR data:
    - **Encryption at Rest**: GCP encrypts data at rest by default.
    - **Customer-Managed Encryption Keys (CMEK)**: For enhanced control, consider using CMEK with Cloud Key Management Service (Cloud KMS) for services like Cloud Storage, BigQuery, and Compute Engine persistent disks.
    - **Encryption in Transit**: Data transferred to and between GCP services is encrypted by default (TLS). Ensure client applications also use TLS for connections to GCP APIs.
+5. **Networking Security**:
+   - **Virtual Private Cloud (VPC)**: Design secure VPC networks with appropriate subnets and firewall rules.
+   - **Firewall Rules**: Implement strict firewall rules to control traffic to and from resources handling PHI. Only allow necessary ports and protocols from trusted sources.
+   - **VPC Service Controls**: Create service perimeters to prevent data exfiltration from authorized GCP services.
+   - **Private Google Access**: Allow Compute Engine instances without external IP addresses to access Google APIs and services privately.
+   - Use **Cloud NAT** for instances that need outbound internet access without direct inbound connections.
+6. **Logging and Monitoring**:
+   - **Cloud Audit Logs**:
+     - Enable and retain Admin activity logs (enabled by default).
+     - Enable and retain Data Access logs for services storing or processing PHI (e.g., Cloud Storage, BigQuery). These often need to be explicitly enabled.
+     - Review System Event logs.
