@@ -23,3 +23,11 @@ config = {
   "email_on_failure": ["your_email@example.com"], # Email recipient for failure alerts
   "slack_webhook_url": None, # Optional: Slack webhook URL for notifications
 }
+
+# --- Common ETL Functions (Python Callables) ---
+# These functions define the actual logic for your ETL steps.
+# They are designed to be called by PythonOperator.
+# Use **kwargs to access Airflow context variables (e.g., dag_run, task_instance).
+
+def extract_data_from_source(**kwargs):
+  pass
