@@ -181,4 +181,9 @@ When using GCP for ingesting and storing EHR data:
    - **Cloud Audit Logs**:
      - Enable and retain Admin activity logs (enabled by default).
      - Enable and retain Data Access logs for services storing or processing PHI (e.g., Cloud Storage, BigQuery). These often need to be explicitly enabled.
-     - Review System Event logs.
+     - Review System Event Logs
+   - **Cloud Logging**: Centralize and store logs. Configure log sinks to export logs to Cloud Storage for long-term archival or to BigQuery for analysis.
+   - **Cloud Monitoring**: Set up alerts for security-related events, unusual activity, or policy violations detected in logs.
+   - Ensure log retention policies meet HIPAA requirements and organizational needs.
+7. **Data Loss Prevention (DLP) API**:
+   - Consider using the Cloud DLP API to discover, classify, and redact sensitive PHI within data stores like Cloud Storage or BigQuery, or in data streams.
