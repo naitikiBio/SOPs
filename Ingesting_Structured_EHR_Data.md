@@ -144,3 +144,28 @@ This SOP applies to all personnel, systems, and processes involved in the planni
 #### 5.3.2. **Technical Safeguards (as per HIPAA Security Rule)**
 1. **Unique User Identification (Required)**: Assign a unique name and/or number for identifying and tracking user identity.
 2. **Authentication (Required)**: Implement procedures to verify that a person or entity seeking access to PHI is the one claimed. This includes strong password policies and multi-factor authentication (MFA) where appropriate.
+3. **Authorization Mechanisms (Required)**: Implement policies and procedures for granting access to PHI, such as through RBAC.
+4. **Data Backup and Disaster Recovery (Required)**: Establish and implement procedures to create and maintain retrievable exact copies of PHI. Have a disaster recovery plan to restore any loss of data.
+#### 5.4. GCP-specific Considerations for PHI and HIPAA
+When using GCP for ingesting and storing EHR data:
+1. **Business Associate Agreement (BAA) with Google Cloud**:
+   - Ensure a BAA is executed with Google Cloud. This agreement outlines Google's responsibilities for protecting PHI.
+   - Understand which GCP services are covered under the BAA ("HIPAA-eligible services").
+2. **Utilize HIPAA-Eligible Services**:
+   - Use only GCP services that are covered by the BAA for workloads involving PHI. Examples include:
+     - Google Cloud Storage
+     - Google BigQuery
+     - Google Compute Engine
+     - Google Kubernetes Engine (GKE)
+     - Google Cloud Healthcare API
+     - Cloud SQL
+     - Cloud Logging & Cloud Monitoring
+   - Refer to Google Cloud's documentation for the most up-to-date list of HIPAA-eligible services.
+3. **Identity and Access Management (IAM)**:
+   - Apply the **Principle of Least Privilege**: Grant users and service accounts only the permissions necessary to perform their tasks.
+   - Use predefined IAM roles where possible, or create custom roles with granular permissions.
+   - Utilize **service accounts** for applications and scripts that access GCP resources. Assign minimal necessary permissions to service accounts. Avoid using user credentials in scripts.
+   - Regularly review IAM policies and audit access patterns.
+   - Use **Workforce Identity Federation** or **Cloud Identity** for managing user identities.
+4. **Data Encryption on GCP**:
+   - **Encryption at Rest**: GCP encrypts data at rest by default.
