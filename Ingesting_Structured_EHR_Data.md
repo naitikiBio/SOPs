@@ -200,3 +200,14 @@ When using GCP for ingesting and storing EHR data:
 10. **Configuration Management**:
     - Use tools like Infrastructure as Code (e.g., Terraform, Cloud Deployment Manager) to manage and version GCP resource configurations, ensuring consistency and auditability.
     - Regularly audit configurations for compliance with security best practices.
+#### 6. Data Handling and Security (General)
+1. **Credentials Management**:
+   - Securely manage API keys, service account keys, and other credentials.
+   - Do not hardcode credentials in scripts. Use environment variables, secret management services (e.g., Google Cloud Secret Manager), or workload identity federation.
+   - Rotate credentials regularly.
+2. **Data Validation**:
+   - Implement data validation checks post-ingestion to ensure data integrity, accuracy, and completeness against source systems or predefined rules.
+   - Validate FHIR resources against relevant profiles (e.g., US Core).
+3. **Secure Disposal/Archival**:
+   - Define procedures for the secure disposal or archival of temporary data created during the ingestion process.
+   - Ensure PHI is not retained longer than necessary or as per data retention policies.
