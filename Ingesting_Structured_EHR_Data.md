@@ -111,8 +111,8 @@ This SOP applies to all personnel, systems, and processes involved in the planni
    - Implement robust error handling (e.g., try-except blocks) for API requests, data parsing, and validation.
    - Log errors comprehensively, including timestamps, error messages, and relevant context (e.g., resource ID, query parameters).
    - Implement retry mechanisms for transient network errors, with exponential backoff.
-5.3. **PHI and HIPAA Compliance Considerations**
-5.3.1. **General Principles**
+#### 5.3. **PHI and HIPAA Compliance Considerations**
+##### 5.3.1. **General Principles**
 	1. **Minimum Necessary Rule**: Access, use, and disclose only the minimum necessary PHI to accomplish the intended purpose of the data ingestion.
 	2. **Access Controls (RBAC)**:
    		- Implement RBAC to ensure that only authorized personnel have access to PHI.
