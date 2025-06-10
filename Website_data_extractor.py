@@ -4,10 +4,18 @@
 
 # --- Installation ---
 # Run this command in your terminal, I am assuming you already know about Python and virtual environments
-# pip install requests
+# pip install requests beautifulsoup4
 
 import requests
-import BeautifulSoup
+from bs4 import BeautifulSoup
+
+# --- Configuration ---
+url = 'your complete url here'
+
+r = requests.get(url) # Returns the entire DOM tree
+print(r.content[:100])
+
+soup = BeautifulSoup(r.content, 'html-parser')
 
 def save_html(html, path):
   with open(path, 'wb') as f:
