@@ -153,4 +153,18 @@ def _send_failure_notification(**context):
 
   # --- DAG Definition ---
   # Define the DAG object with its properties.
-  with DAG()
+  with DAG(
+    dag_id = "etl_workflow_template",
+    start_date = pendulum.datetime(2023, 1, 1, tz="EST"),
+    schedule = None, # set your desired schedule (e.g., "@daily", "0 0 * * *", timedelta(days=1))
+                     # None means manual trigger, Use timedelta for periodic execution.
+    catchup = False, # If true, backfills missing runs from start_date to current date.
+    tags = ["etl", "template", "data_pipeline"],
+    default_args = {
+      "owner": "airflow",
+      "depends_on_past": False,
+      "email_on_retry": False,
+      "retries": 1, # Number of times to retry a task if it fails
+      "retry_delay": pendulum.duration(minutes=5), # Delay between retries
+      "on_failure_callback": _send_failure_notification, # Function to call on task failure
+  )
