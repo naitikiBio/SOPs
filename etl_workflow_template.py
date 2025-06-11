@@ -153,37 +153,51 @@ def _send_failure_notification(**context):
 
   # --- DAG Definition ---
   # Define the DAG object with its properties.
-  with DAG(
-    dag_id = "etl_workflow_template",
-    start_date = pendulum.datetime(2023, 1, 1, tz="EST"),
-    schedule = None, # set your desired schedule (e.g., "@daily", "0 0 * * *", timedelta(days=1))
-                     # None means manual trigger, Use timedelta for periodic execution.
-    catchup = False, # If true, backfills missing runs from start_date to current date.
-    tags = ["etl", "template", "data_pipeline"],
-    default_args = {
-      "owner": "airflow",
-      "depends_on_past": False,
-      "email_on_retry": False,
-      "retries": 1, # Number of times to retry a task if it fails
-      "retry_delay": pendulum.duration(minutes=5), # Delay between retries
-      "on_failure_callback": _send_failure_notification, # Function to call on task failure
-    },
-    doc_md = """
-    ### ETL Workflow Template DAG
-    This DAG provides a template for a common Extract, Transform, Load (ETL) pipeline.
-    It demonstrates best practices for structuring, parameterizing, and handling errors in Airflow DAGs.
+with DAG(
+  dag_id = "etl_workflow_template",
+  start_date = pendulum.datetime(2023, 1, 1, tz="EST"),
+  schedule = None, # set your desired schedule (e.g., "@daily", "0 0 * * *", timedelta(days=1))
+                   # None means manual trigger, Use timedelta for periodic execution.
+  catchup = False, # If true, backfills missing runs from start_date to current date.
+  tags = ["etl", "template", "data_pipeline"],
+  default_args = {
+    "owner": "airflow",
+    "depends_on_past": False,
+    "email_on_retry": False,
+    "retries": 1, # Number of times to retry a task if it fails
+    "retry_delay": pendulum.duration(minutes=5), # Delay between retries
+    "on_failure_callback": _send_failure_notification, # Function to call on task failure
+  },
+  doc_md = """
+  ### ETL Workflow Template DAG
+  This DAG provides a template for a common Extract, Transform, Load (ETL) pipeline.
+  It demonstrates best practices for structuring, parameterizing, and handling errors in Airflow DAGs.
 
-    **Stages:**
-    1. **Extract:** Pulls raw data from a source system.
-    2. **Transform:** Processes and cleans the raw data.
-    3. **Load:** Loads the transformed data into a target data warehouse or database.
+  **Stages:**
+  1. **Extract:** Pulls raw data from a source system.
+  2. **Transform:** Processes and cleans the raw data.
+  3. **Load:** Loads the transformed data into a target data warehouse or database.
 
-    **Configuration:**
-    Modify the `config` dictionary at the top of the DAG file to adjust source systems, target tables, GCS buckets, and notification settings.
+  **Configuration:**
+  Modify the `config` dictionary at the top of the DAG file to adjust source systems, target tables, GCS buckets, and notification settings.
 
-    **To Use:**
-    * Replace placeholder functions (`_extract_data_from_source`, `_transform_data`, `_load_data_to_target`) with your actual logic.
-    * Update `BashOperator` for examples with real commands if applicable.
-    * Adjust `schedule` to your desired frequency.
-    """,
+  **To Use:**
+  * Replace placeholder functions (`_extract_data_from_source`, `_transform_data`, `_load_data_to_target`) with your actual logic.
+  * Update `BashOperator` for examples with real commands if applicable.
+  * Adjust `schedule` to your desired frequency.
+  """,
+) as dag:
+  # --- Start and End Tasks ---
+  # Dummy operators are useful for marking the start/end of a workflow
+  # or for grouping related tasks logically.
+  start = DummyOperator(
+    task_id = "start_etl_workflow",
   )
+
+  end = DummyOperator(
+    task_id = "end_etl_workflow",
+  )
+
+  # --- ETL Tasks ---
+  # 1. This task extracts data from the specified source.
+  
