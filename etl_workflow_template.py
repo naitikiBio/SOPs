@@ -167,4 +167,23 @@ def _send_failure_notification(**context):
       "retries": 1, # Number of times to retry a task if it fails
       "retry_delay": pendulum.duration(minutes=5), # Delay between retries
       "on_failure_callback": _send_failure_notification, # Function to call on task failure
+    },
+    doc_md = """
+    ### ETL Workflow Template DAG
+    This DAG provides a template for a common Extract, Transform, Load (ETL) pipeline.
+    It demonstrates best practices for structuring, parameterizing, and handling errors in Airflow DAGs.
+
+    **Stages:**
+    1. **Extract:** Pulls raw data from a source system.
+    2. **Transform:** Processes and cleans the raw data.
+    3. **Load:** Loads the transformed data into a target data warehouse or database.
+
+    **Configuration:**
+    Modify the `config` dictionary at the top of the DAG file to adjust source systems, target tables, GCS buckets, and notification settings.
+
+    **To Use:**
+    * Replace placeholder functions (`_extract_data_from_source`, `_transform_data`, `_load_data_to_target`) with your actual logic.
+    * Update `BashOperator` for examples with real commands if applicable.
+    * Adjust `schedule` to your desired frequency.
+    """,
   )
