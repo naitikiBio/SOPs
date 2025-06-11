@@ -4,7 +4,8 @@ To use this template:
 1. Save the .py file: Save the code above as a Python file (e.g., etl_workflow_template.py).
 2. Upload to Cloud Composer: Upload this file to the dags/ folder in your Cloud Storage bucket associated with your Cloud Composer environment. Airflow will automatically discover and parse it.
 3. Customize the config: Adjust the config dictionary at the top of the Python file with your specific source names, target datasets, GCS bucket names, and notification emails.
-4. Implement ETL Logic: Replace the placeholder Python functions (_extract_data_from_source, _transform_data, _load_data_to_target) and BashOperator commands with your actual data extraction, transformation, and loading code. You will likely use specific Airflow operators (e.g., BigQueryOperator, GCSHook, PostgresOperator, DataprocOperator) or custom Python code that interacts with your data systems.
+4. Implement ETL Logic: Replace the placeholder Python functions (_extract_data_from_source, _transform_data, _load_data_to_target) and BashOperator commands with your actual data extraction, 
+   transformation, and loading code. You will likely use specific Airflow operators (e.g., BigQueryOperator, GCSHook, PostgresOperator, DataprocOperator) or custom Python code that interacts with your data systems.
 5. Set the schedule: Define your desired schedule for the DAG (e.g., @daily, 0 0 * * * for daily at midnight UTC, or a timedelta for more frequent runs).
 6. Test Thoroughly: Test your DAG in a development or staging environment before deploying to production.
 """
